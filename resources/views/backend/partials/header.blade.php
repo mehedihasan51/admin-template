@@ -51,8 +51,8 @@
                 />
               </div>
               <span class="profile-username">
-                <span class="op-7">Hi,</span>
-                <span class="fw-bold">Hizrian</span>
+                <span class="font-medium text-base text-gray-800">Admin  Admin</span>
+                <span class="fw-bold"><div class="font-medium text-base text-gray-800 text">{{ Auth::user()->name }}</div></span>
               </span>
             </a>
             <ul class="dropdown-menu dropdown-user animated fadeIn">
@@ -67,8 +67,8 @@
                       />
                     </div>
                     <div class="u-text">
-                      <h4>Hizrian</h4>
-                      <p class="text-muted">hello@example.com</p>
+                      <h4><div class="font-bold text-base text-gray-800">{{ Auth::user()->name }}</div></h4>
+                      
                       <a
                         href="profile.html"
                         class="btn btn-xs btn-secondary btn-sm"
@@ -80,8 +80,6 @@
                 <li>
                   <div class="dropdown-divider"></div>
                   <a class="dropdown-item" href="#">My Profile</a>
-                  <a class="dropdown-item" href="#">My Balance</a>
-                  <a class="dropdown-item" href="#">Inbox</a>
                   <div class="dropdown-divider"></div>
                   <a class="dropdown-item" href="#">Account Setting</a>
                   <div class="dropdown-divider"></div>

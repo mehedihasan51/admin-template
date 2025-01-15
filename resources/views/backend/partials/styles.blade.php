@@ -20,3 +20,5 @@ type="image/x-icon"
 <link rel="stylesheet" href="{{asset('/backend/assets/css/plugins.min.css')}}" />
 <link rel="stylesheet" href="{{asset('/backend/assets/css/kaiadmin.min.css')}}" />
 
+
+@stack('styles')

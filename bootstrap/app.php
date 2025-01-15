@@ -16,9 +16,9 @@ return Application::configure(basePath: dirname(__DIR__))
                 ->prefix('admin')
                 ->group(base_path('routes/backend.php'));
 
-            // Route::middleware(['web', 'auth', 'admin'])
-            //     ->prefix('admin/settings')
-            //     ->group(base_path('routes/settings.php'));
+            Route::middleware(['web', 'auth', 'admin'])
+                ->prefix('admin/settings')
+                ->group(base_path('routes/settings.php'));
         },
     )
     ->withMiddleware(function (Middleware $middleware) {

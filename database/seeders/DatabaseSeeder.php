@@ -19,20 +19,25 @@ class DatabaseSeeder extends Seeder
         // User::factory(10)->create();
 
         DB::table('users')->insert([
-          [  'id'=>1,
-           'name' => 'admin',
-            'email' => 'admin@admin.com',
+          [  
+            'id'  =>   1,
+           'firstName'  =>   'admin',
+            'lastName'    => 'admin',
+            'email'     =>   'admin@admin.com',
             'email_verified_at' => Carbon::now(),
+            'phone_number'       => '0123456789',
             'password' => Hash::make('12345678'),
             'role' => 'admin',
             'status' => 'active',
             'remember_token' => null,
         ],
         [
-            'id'=>2,
-           'name' => 'user',
+            'id'  =>  2,
+           'firstName'  =>  'user',
+           'lastName'   =>  'user',
             'email' => 'user@user.com',
             'email_verified_at' => Carbon::now(),
+            'phone_number'      => '1234567890',
             'password' => Hash::make('12345678'),
             'role' => 'user',
             'status' => 'active',
