@@ -4,70 +4,156 @@
 
 @section('content')
 
-<div class="col-md-12 p-5 mt-5">
-    <div class="page-content">
-        <div class="container-fluid">
-            {{-- Start page title --}}
-            <div class="row">
-                <div class="col-12">
-                    <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                        <div class="page-title-right">
-                            <ol class="breadcrumb m-0">
-                                <li class="breadcrumb-item"><a href="{{ route('clients-feedback.index') }}">Table</a></li>
-                                <li class="breadcrumb-item active">Clients Feedback</li>
-                            </ol>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            {{-- End page title --}}
 
+<div class="container">
+  <div class="page-inner">
+    <div class="page-header">
+      <!-- Breadcrumb -->
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb m-4">
+          <li class="breadcrumb-item"><a href="#">Client</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Clients Feedback</li>
+        </ol>
+      </nav>
+    </div>
 
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="card">
-                        <div class="card-header d-flex justify-content-between align-items-center">
-                            <h5 class="card-title mb-0">All Clients Feedback List</h5>
-                            <a href="{{ route('clients-feedback.create') }}" class="btn btn-primary btn-sm"
-                                id="addNewPage">Add Clients Feedback</a>
-                        </div>
-                        <div class="card-body">
-                            <table id="datatable"
-                                class="table table-bordered dt-responsive nowrap table-striped align-middle"
-                                style="width:100%">
-                                <thead>
-                                    <tr>
-                                        <th class="column-id">#</th>
-                                        <th class="column-content">Name</th>
-                                        <th class="column-content">Title</th>
-                                        <th class="column-content">Rating</th>
-                                        <th class="column-content">Description</th>
-                                        <th class="column-status">Status</th>
-                                        <th class="column-action">Action</th>
-                                    </tr>
-                                    
-                                </thead>
-                                <tbody>
-                                    {{-- Dynamic Data --}}
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <div class="d-flex align-items-center">
+            <h4 class="card-title">Add Row</h4>
+            <a href="{{ route('clients-feedback.create') }}" class="btn btn-primary btn-round ms-auto" id="addNewPage"><i class="fa fa-plus"></i>
+              Add Clients Feedback</a>
+          </div>
         </div>
+        <div class="card-body">
+          <!-- Modal -->
+          <div
+            class="modal fade"
+            id="addRowModal"
+            tabindex="-1"
+            role="dialog"
+            aria-hidden="true"
+          >
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header border-0">
+                  <h5 class="modal-title">
+                    <span class="fw-mediumbold"> New</span>
+                    <span class="fw-light"> Row </span>
+                  </h5>
+                  <button
+                    type="button"
+                    class="close"
+                    data-dismiss="modal"
+                    aria-label="Close"
+                  >
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <p class="small">
+                    Create a new row using this form, make sure you
+                    fill them all
+                  </p>
+                  <form>
+                    <div class="row">
+                      <div class="col-sm-12">
+                        <div class="form-group form-group-default">
+                          <label>Name</label>
+                          <input
+                            id="addName"
+                            type="text"
+                            class="form-control"
+                            placeholder="fill name"
+                          />
+                        </div>
+                      </div>
+                      <div class="col-md-6 pe-0">
+                        <div class="form-group form-group-default">
+                          <label>Position</label>
+                          <input
+                            id="addPosition"
+                            type="text"
+                            class="form-control"
+                            placeholder="fill position"
+                          />
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group form-group-default">
+                          <label>Office</label>
+                          <input
+                            id="addOffice"
+                            type="text"
+                            class="form-control"
+                            placeholder="fill office"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+                <div class="modal-footer border-0">
+                  <button
+                    type="button"
+                    id="addRowButton"
+                    class="btn btn-primary"
+                  >
+                    Add
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-danger"
+                    data-dismiss="modal"
+                  >
+                    Close
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+  
+          <div class="table-responsive">
+            <table
+              id="datatable"
+              class="display table table-striped table-hover"
+            >
+              <thead>
+                <tr>
+                  <th class="column-id">#</th>
+                  <th class="column-content">Name</th>
+                  <th class="column-content">Title</th>
+                  <th class="column-content">Rating</th>
+                  <th class="column-content">Description</th>
+                  <th class="column-status">Status</th>
+                  <th style="width: 10%" class="column-action">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+
+                {{-- Dynamic Data --}}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
+</div>
+
 
 @endsection
 
 
 @push('scripts')
     <script>
-        $(document).ready(function() {
+      $(document).ready(function() {
             $.ajaxSetup({
                 headers: {
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                    
+                   
                 },
             });
 
@@ -183,26 +269,25 @@
 
         // Status Change
         function statusChange(id) {
-            let url = '{{ route('clients-feedback.status', ':id') }}';
-            $.ajax({
-                type: "GET",
-                url: url.replace(':id', id),
-                success: function(resp) {
-                    console.log(resp);
-                    $('#datatable').DataTable().ajax.reload();
-                    if (resp.success === true) {
-                        toastr.success(resp.message);
-                    } else if (resp.errors) {
-                        toastr.error(resp.errors[0]);
-                    } else {
-                        toastr.error(resp.message);
-                    }
-                },
-                error: function(error) {
-                    toastr.error('An error occurred. Please try again.');
-                }
-            });
+    let url = '{{ route('clients-feedback.status', ':id') }}'.replace(':id', id);
+
+    $.ajax({
+        type: "PATCH",
+        url: url,
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+        },
+        success: function(resp) {
+            console.log('Success:', resp); // Debugging
+            $('#datatable').DataTable().ajax.reload();
+            toastr.success(resp.message);
+        },
+        error: function(xhr, status, error) {
+            console.error('Error:', xhr.responseText); // Debugging
+            toastr.error('An error occurred. Please try again.');
         }
+    });
+}
 
         // delete Confirm
         function showDeleteConfirm(id) {
@@ -224,26 +309,25 @@
 
         // Delete Button
         function deleteItem(id) {
-            let url = '{{ route('clients-feedback.destroy', ':id') }}';
-            let csrfToken = '{{ csrf_token() }}';
-            $.ajax({
-                type: "DELETE",
-                url: url.replace(':id', id),
-                headers: {
-                    'X-CSRF-TOKEN': csrfToken
-                },
-                success: function(resp) {
-                    $('#datatable').DataTable().ajax.reload();
-                    if (resp['t-success']) {
-                        toastr.success(resp.message);
-                    } else {
-                        toastr.error(resp.message);
-                    }
-                },
-                error: function(error) {
-                    toastr.error('An error occurred. Please try again.');
-                }
-            });
+    let url = '{{ route('clients-feedback.destroy', ':id') }}'.replace(':id', id);
+
+    $.ajax({
+        type: "DELETE",
+        url: url,
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+        },
+        success: function(resp) {
+            $('#datatable').DataTable().ajax.reload();
+            toastr.success(resp.message);
+        },
+        error: function(error) {
+            toastr.error('An error occurred. Please try again.');
         }
+    });
+}
+
+
+
     </script>
 @endpush

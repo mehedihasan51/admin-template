@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Web\Backend\Settings\ProfileController;
 use App\Http\Controllers\Web\Backend\Settings\IntegrationController;
+use App\Http\Controllers\Web\Backend\Settings\SocialMediaController;
 use App\Http\Controllers\Web\Backend\Settings\MailSettingsController;
 use App\Http\Controllers\Web\Backend\Settings\SystemSettingsController;
 
@@ -35,4 +36,10 @@ Route::controller(IntegrationController::class)->group(function () {
     Route::patch('/google-setting', 'updateGoogleCredentials')->name('google.update');
     Route::patch('/facebook-setting', 'updateFacebookCredentials')->name('facebook.update');
     Route::patch('/stripe-setting', 'updateStripeCredentials')->name('stripe.update');
+});
+//! Route for SocialMedia Settings
+Route::controller(SocialMediaController::class)->group(function () {
+    Route::get('/social-media', 'index')->name('social.index');
+    Route::post('/social-media', 'update')->name('social.update');
+    Route::delete('/social-media/{id}', 'destroy')->name('social.delete');
 });

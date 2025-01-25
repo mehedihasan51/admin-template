@@ -24,7 +24,7 @@ class SystemSettingsController extends Controller {
         return view('backend.layouts.settings.system_settings', compact('setting'));
     }
 
-/**
+    /**
      * Update the system settings.
      *
      * @param Request $request

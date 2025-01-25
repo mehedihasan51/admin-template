@@ -5,15 +5,22 @@
 @section('content')
 
 <div class="container">
-    <nav aria-label="breadcrumb">
-        <ol class="breadcrumb m-4">
+    <div class="page-inner">
+        <div class="page-header">
+        <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="#">Settings</a></li>
             <li class="breadcrumb-item active" aria-current="page">Integration Settings</li>
         </ol>
     </nav>
+    </div>
 
-    <!-- Tab Navigation -->
-    <ul class="nav nav-tabs" id="settingsTabs" role="tablist">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body">
+
+             <!-- Tab Navigation -->
+         <ul class="nav nav-tabs" id="settingsTabs" role="tablist">
         <li class="nav-item" role="presentation">
             <button class="nav-link active" id="google-tab" data-bs-toggle="tab" data-bs-target="#google" type="button" role="tab" aria-controls="google" aria-selected="true">Google</button>
         </li>
@@ -116,7 +123,11 @@
             </div>
             <button type="submit" class="btn btn-primary mt-4">Save Stripe Settings</button>
         </form>
+       </div>
+        </div>
+     </div>
     </div>
+ </div>
 </div>
 
 @endsection

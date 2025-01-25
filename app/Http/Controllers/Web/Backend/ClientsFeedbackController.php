@@ -41,10 +41,10 @@ class ClientsFeedbackController extends Controller {
                     return '
                             <div class="d-flex justify-content-center align-items-center gap-3" style="height: 100%;">
                                <a href="' . route('clients-feedback.edit', ['id' => $clientsFeedback->id]) . '" class="link-primary text-decoration-none" title="Edit">
-                                  <i class="fa fa-edit" style="font-size: 24px;"></i>
+                                  <i class="fa fa-edit" style="font-size: 18px;"></i>
                                    </a>
                                    <a href="javascript:void(0);" onclick="showDeleteConfirm(' . $clientsFeedback->id . ')" class="link-danger text-decoration-none" title="Delete">
-                                     <i class="fa fa-times" style="font-size: 24px;"></i>
+                                     <i class="fa fa-times" style="font-size: 18px;"></i>
                                     </a>
                                     </div>
                                          ';
@@ -148,28 +148,19 @@ class ClientsFeedbackController extends Controller {
      */
     public function status(int $id): JsonResponse {
         $clientsFeedback = ClientsFeedback::findOrFail($id);
-
-        if ($clientsFeedback->status == 'active') {
-            $clientsFeedback->status = 'inactive';
-            $clientsFeedback->save();
-            return response()->json([
-                'success' => false,
-                'message' => 'Unpublished Successfully.',
-                'data'    => $clientsFeedback,
-            ]);
-        } else {
-            $clientsFeedback->status = 'active';
-            $clientsFeedback->save();
-            return response()->json([
-                'success' => true,
-                'message' => 'Published Successfully.',
-                'data'    => $clientsFeedback,
-            ]);
-        }
+    
+        $clientsFeedback->status = $clientsFeedback->status === 'active' ? 'inactive' : 'active';
+        $clientsFeedback->save();
+    
+        return response()->json([
+            'success' => true,
+            'message' => $clientsFeedback->status === 'active' ? 'Published Successfully.' : 'Unpublished Successfully.',
+            'data' => $clientsFeedback,
+        ]);
     }
-
+    
     /**
-     * Remove the specified client feedback from storage.
+     * Remove the specified client feedback from destroy.
      *
      * @param  int  $id
      * @return JsonResponse
@@ -177,12 +168,13 @@ class ClientsFeedbackController extends Controller {
     public function destroy(int $id): JsonResponse {
         $clientsFeedback = ClientsFeedback::findOrFail($id);
         $clientsFeedback->delete();
-
+    
         return response()->json([
-            't-success' => true,
-            'message'   => 'Deleted successfully.',
+            'success' => true,
+            'message' => 'Deleted successfully.',
         ]);
     }
+    
 }
 
 

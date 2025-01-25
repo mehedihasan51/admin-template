@@ -15,7 +15,7 @@ use Illuminate\View\View;
 
 class ProfileController extends Controller {
 
-        /**
+     /**
      * Display the user's profile settings page.
      *
      * @param Request $request
@@ -130,6 +130,13 @@ class ProfileController extends Controller {
             ]);
         }
     }
+      
+    /**
+     * Update the user's cover photo.
+     *
+     * @param Request $request
+     * @return RedirectResponse
+     */
     
     public function UpdateCoverPhoto(Request $request) {
         $request->validate([
@@ -166,13 +173,6 @@ class ProfileController extends Controller {
         }
     }
     
-
-    /**
-     * Update the user's cover photo.
-     *
-     * @param Request $request
-     * @return RedirectResponse
-     */
 
     
 }
